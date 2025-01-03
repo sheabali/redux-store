@@ -16,8 +16,24 @@ const initialState : InitialState =  {
       description: "Create home page.",
       dueDate : '20',
       isCompleted: false,
+      priority: "Low"
+    },
+    {
+      id : "1234",
+      title: "Initial GitHub",
+      description: "Create GitHub Repository.",
+      dueDate : '20',
+      isCompleted: false,
+      priority: "Medium"
+    },
+    {
+      id : "1234",
+      title: "Initial AC",
+      description: "Create GitHub Repository.",
+      dueDate : '20',
+      isCompleted: false,
       priority: "High"
-    }
+    },
   ],
   filter: 'all'
 }
