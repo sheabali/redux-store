@@ -11,7 +11,7 @@ interface InitialState {
 const initialState : InitialState =  {
   tasks : [
     {
-      id : "1234",
+      id : "123455",
       title: "Initial State",
       description: "Create home page.",
       dueDate : '20',
@@ -27,7 +27,7 @@ const initialState : InitialState =  {
       priority: "Medium"
     },
     {
-      id : "1234",
+      id : "12345",
       title: "Initial AC",
       description: "Create GitHub Repository.",
       dueDate : '20',
