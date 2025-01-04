@@ -36,11 +36,16 @@ import { cn } from '@/lib/utils';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
+import { addTask } from '@/redux/features/tasks/taskSlice';
+
+import { useAppDispatch } from '@/redux/hook';
 
 export function AddTaskModal() {
   const form = useForm();
-  const onSubmit = (data: { [key: string]: unknown }) => {
+  const dispatch = useAppDispatch();
+  const onSubmit = (data) => {
     console.log(data);
+    dispatch(addTask(data));
   };
 
   return (
@@ -92,7 +97,7 @@ export function AddTaskModal() {
 
             <FormField
               control={form.control}
-              name="email"
+              name="priority"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Priority</FormLabel>
