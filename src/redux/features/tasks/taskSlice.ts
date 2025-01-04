@@ -4,7 +4,7 @@ import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 
 interface InitialState {
   tasks: ITask[];
-  filter: 'all' | 'high' | 'medium' | 'low';
+  filter: 'all' | 'low' | 'medium' | 'high';
 }
 
 type DraftTask = Pick<ITask, 'title' | 'description' | 'priority' | 'dueDate'>;
@@ -46,16 +46,32 @@ const taskSlice = createSlice({
       console.log(action.payload);
       state.tasks = state.tasks.filter((task) => task.id !== action.payload);
     },
+    updateTask: (
+      state,
+      action: PayloadAction<'all' | 'low' | 'medium' | 'high'>
+    ) => {
+      state.filter = action.payload;
+    },
   },
 });
 
 export const selectTasks = (state: RootState) => {
-  return state.todo.tasks;
+  const filter = state.todo.filter;
+  if (filter === 'low') {
+    return state.todo.tasks.filter((task) => task.priority === 'low');
+  } else if (filter === 'medium') {
+    return state.todo.tasks.filter((task) => task.priority === 'medium');
+  } else if (filter === 'high') {
+    return state.todo.tasks.filter((task) => task.priority === 'high');
+  } else {
+    return state.todo.tasks;
+  }
 };
 export const selectFilter = (state: RootState) => {
   return state.todo.filter;
 };
 
-export const { addTask, togoleCompleteState, deleteTask } = taskSlice.actions;
+export const { addTask, togoleCompleteState, deleteTask, updateTask } =
+  taskSlice.actions;
 
 export default taskSlice.reducer;
