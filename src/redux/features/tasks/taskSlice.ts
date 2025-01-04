@@ -14,7 +14,16 @@ const createTask = (taskData: DraftTask): ITask => {
 };
 
 const initialState: InitialState = {
-  tasks: [],
+  tasks: [
+    {
+      id: '1234',
+      title: 'Initial State',
+      description: 'Create home page.',
+      dueDate: '20',
+      isCompleted: false,
+      priority: 'high',
+    },
+  ],
   filter: 'all',
 };
 
@@ -26,6 +35,17 @@ const taskSlice = createSlice({
       const taskData = createTask(action.payload);
       state.tasks.push(taskData);
     },
+    togoleCompleteState: (state, action: PayloadAction<string>) => {
+      state.tasks.forEach((task) =>
+        task.id === action.payload
+          ? (task.isCompleted = !task.isCompleted)
+          : task
+      );
+    },
+    deleteTask: (state, action: PayloadAction<string>) => {
+      console.log(action.payload);
+      state.tasks = state.tasks.filter((task) => task.id !== action.payload);
+    },
   },
 });
 
@@ -36,6 +56,6 @@ export const selectFilter = (state: RootState) => {
   return state.todo.filter;
 };
 
-export const { addTask } = taskSlice.actions;
+export const { addTask, togoleCompleteState, deleteTask } = taskSlice.actions;
 
 export default taskSlice.reducer;
