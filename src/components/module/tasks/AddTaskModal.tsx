@@ -26,7 +26,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
-import { useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import {
   Popover,
   PopoverContent,
@@ -39,13 +39,14 @@ import { format } from 'date-fns';
 import { addTask } from '@/redux/features/tasks/taskSlice';
 
 import { useAppDispatch } from '@/redux/hook';
+import { ITask } from '@/types';
 
 export function AddTaskModal() {
   const form = useForm();
   const dispatch = useAppDispatch();
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
-    dispatch(addTask(data));
+    dispatch(addTask(data as ITask));
   };
 
   return (
