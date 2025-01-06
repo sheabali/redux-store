@@ -36,26 +36,20 @@ import { cn } from '@/lib/utils';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
-import { addTask } from '@/redux/features/tasks/taskSlice';
 
-import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { ITask } from '@/types';
-import { selectUser } from '@/redux/features/users/userSlice';
 import { useState } from 'react';
 
 export function AddTaskModal() {
   const [open, setOpen] = useState(false);
 
   const form = useForm();
-  const dispatch = useAppDispatch();
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
-    dispatch(addTask(data as ITask));
+
     setOpen(false);
     form.reset();
   };
-
-  const users = useAppSelector(selectUser);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -143,11 +137,7 @@ export function AddTaskModal() {
                         <SelectValue placeholder="Select a user." />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
-                      {users.map((user) => (
-                        <SelectItem value={user.id}>{user.name}</SelectItem>
-                      ))}
-                    </SelectContent>
+                    <SelectContent></SelectContent>
                   </Select>
                 </FormItem>
               )}
