@@ -24,7 +24,7 @@ export function AddUserModal() {
   const form = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
+    // console.log(data);
   };
 
   return (
